@@ -1,0 +1,431 @@
+[
+    {
+        "id": "001",
+        "cuisine_ethnicity": "Thai",
+        "cuisine_protein": "chicken",
+        "cuisine_flavor_profile": [
+            "spicy",
+            "light"
+        ],
+        "pairing_principle": "Spicy Thai chicken dishes need something cooling and slightly sweet to tame heat without flattening the aromatics. Carbonation helps reset the palate between bites.",
+        "alc": false,
+        "level": "casual",
+        "example_drink": "Mango Tango sparkling water or any mango-flavored sparkling drink",
+        "notes": "The mango sweetness mirrors Thai aromatics; bubbles cut the heat"
+    },
+    {
+        "id": "002",
+        "cuisine_ethnicity": "Thai",
+        "cuisine_protein": "chicken",
+        "cuisine_flavor_profile": [
+            "spicy",
+            "light"
+        ],
+        "pairing_principle": "Ginger and lemongrass notes in Thai chicken call for a drink with its own herbal brightness. Ginger beer's spice-on-spice effect is counterintuitive but works — it amplifies the heat briefly then cools it.",
+        "alc": false,
+        "level": "mid",
+        "example_drink": "Fever-Tree Ginger Beer over ice with a lime wedge",
+        "notes": "Go full-sugar ginger beer here, not diet — you need the sweetness as a buffer"
+    },
+    {
+        "id": "003",
+        "cuisine_ethnicity": "Thai",
+        "cuisine_protein": "chicken",
+        "cuisine_flavor_profile": [
+            "spicy",
+            "light"
+        ],
+        "pairing_principle": "A dry, aromatic Riesling or a crisp Chang beer are the classic Thai pairings for a reason — residual sugar in the Riesling coats the palate against capsaicin while the acidity keeps it from feeling heavy.",
+        "alc": true,
+        "level": "elevated",
+        "example_drink": "Dr. Loosen Blue Slate Riesling or Singha if you want to stay in-region",
+        "notes": "Off-dry Riesling is one of the most food-friendly wines in existence; Thai food is its best argument"
+    },
+    {
+        "id": "004",
+        "cuisine_ethnicity": "Japanese",
+        "cuisine_protein": "fish",
+        "cuisine_flavor_profile": [
+            "umami",
+            "light"
+        ],
+        "pairing_principle": "Delicate fish with umami depth — sashimi, miso-glazed fish, dashi-based dishes — needs something that enhances without competing. Green tea's tannins cleanse the palate and the vegetal notes harmonize with ocean flavors.",
+        "alc": false,
+        "level": "casual",
+        "example_drink": "Cold-brewed sencha or any high-quality bottled green tea, unsweetened",
+        "notes": "Avoid sweetened green teas here — sugar fights the umami"
+    },
+    {
+        "id": "005",
+        "cuisine_ethnicity": "Japanese",
+        "cuisine_protein": "fish",
+        "cuisine_flavor_profile": [
+            "umami",
+            "light"
+        ],
+        "pairing_principle": "Yuzu's floral citrus character is a natural bridge to Japanese fish dishes. A yuzu soda or yuzu sparkling water adds brightness that lifts rather than overwhelms delicate fish flavors.",
+        "alc": false,
+        "level": "mid",
+        "example_drink": "Cawston Press Yuzu Lemonade or Trader Joe's Yuzu Sparkling Water",
+        "notes": "If you can find it, Kimino yuzu sparkling water is worth the find"
+    },
+    {
+        "id": "006",
+        "cuisine_ethnicity": "Japanese",
+        "cuisine_protein": "fish",
+        "cuisine_flavor_profile": [
+            "umami",
+            "light"
+        ],
+        "pairing_principle": "Aged junmai sake has enough umami of its own to meet the dish on equal footing. The rice-forward earthiness mirrors the ocean depth of quality fish without masking it.",
+        "alc": true,
+        "level": "elevated",
+        "example_drink": "Hakkaisan Junmai Ginjo served slightly chilled, not cold",
+        "notes": "Avoid hot sake with delicate fish — heat amplifies alcohol and flattens the fish's flavor"
+    },
+    {
+        "id": "007",
+        "cuisine_ethnicity": "Italian",
+        "cuisine_protein": "beef",
+        "cuisine_flavor_profile": [
+            "rich/fatty",
+            "umami"
+        ],
+        "pairing_principle": "Rich braised beef, ragù, or bistecca needs something with enough tannin and acid to cut through fat. The pairing principle is contrast — the drink should feel like a palate reset, not a complement.",
+        "alc": false,
+        "level": "casual",
+        "example_drink": "San Pellegrino with a squeeze of lemon — classic Italian table water for a reason",
+        "notes": "Carbonation plus acid does the work that tannin does in wine"
+    },
+    {
+        "id": "008",
+        "cuisine_ethnicity": "Italian",
+        "cuisine_protein": "beef",
+        "cuisine_flavor_profile": [
+            "rich/fatty",
+            "umami"
+        ],
+        "pairing_principle": "A shrub — drinking vinegar mixed with sparkling water — mimics the acid structure of wine without the alcohol. A balsamic or fig shrub specifically echoes the Italian pantry and stands up to beef's richness.",
+        "alc": false,
+        "level": "mid",
+        "example_drink": "Balsamic fig shrub: 2oz shrub syrup, 6oz sparkling water, ice",
+        "notes": "Shrubs are genuinely underrated NA wine alternatives for rich meat dishes"
+    },
+    {
+        "id": "009",
+        "cuisine_ethnicity": "Italian",
+        "cuisine_protein": "beef",
+        "cuisine_flavor_profile": [
+            "rich/fatty",
+            "umami"
+        ],
+        "pairing_principle": "Barolo is the canonical answer for rich Italian beef — high tannin, high acid, earthy, built for fat. The Nebbiolo grape's rose and tar character mirrors the depth of a long braise or aged beef.",
+        "alc": true,
+        "level": "elevated",
+        "example_drink": "Giacomo Conterno Barolo or any Langhe Nebbiolo for a more accessible entry point",
+        "notes": "Barolo needs to breathe — decant at least 30 min before serving with food"
+    },
+    {
+        "id": "010",
+        "cuisine_ethnicity": "Mexican",
+        "cuisine_protein": "pork",
+        "cuisine_flavor_profile": [
+            "smoky",
+            "spicy"
+        ],
+        "pairing_principle": "Smoky, spicy pork — carnitas, al pastor, birria — has enough fat and char to handle something assertive. Horchata's creaminess and cinnamon sweetness is the traditional counterpoint and it works perfectly.",
+        "alc": false,
+        "level": "casual",
+        "example_drink": "Horchata — store-bought or fresh, both work",
+        "notes": "The rice milk fat coats the palate against capsaicin; cinnamon mirrors the spice"
+    },
+    {
+        "id": "011",
+        "cuisine_ethnicity": "Mexican",
+        "cuisine_protein": "pork",
+        "cuisine_flavor_profile": [
+            "smoky",
+            "spicy"
+        ],
+        "pairing_principle": "Tamarind's sweet-sour profile cuts through pork fat and plays beautifully against smoke and chile. A tamarind agua fresca or tamarind kombucha gives you that tang without overpowering.",
+        "alc": false,
+        "level": "mid",
+        "example_drink": "GT's Synergy Guava Goddess kombucha or a fresh tamarind agua fresca",
+        "notes": "If you can find tamarind kombucha specifically, it's an exceptional match"
+    },
+    {
+        "id": "012",
+        "cuisine_ethnicity": "Mexican",
+        "cuisine_protein": "pork",
+        "cuisine_flavor_profile": [
+            "smoky",
+            "spicy"
+        ],
+        "pairing_principle": "Mezcal's smoke meets the dish's smoke — it's an amplification pairing rather than contrast. A mezcal paloma lets grapefruit acid do the cutting work while the spirit echoes the char.",
+        "alc": true,
+        "level": "elevated",
+        "example_drink": "Mezcal Paloma: 2oz Del Maguey Vida, grapefruit juice, lime, Topo Chico, salt rim",
+        "notes": "Don't use a smoky Islay scotch logic here — mezcal smoke is vegetal not peaty, it mirrors food smoke differently"
+    },
+    {
+        "id": "013",
+        "cuisine_ethnicity": "Indian",
+        "cuisine_protein": "vegetarian",
+        "cuisine_flavor_profile": [
+            "spicy",
+            "rich/fatty"
+        ],
+        "pairing_principle": "Creamy, spicy vegetarian Indian — dal makhani, paneer tikka masala, saag — needs dairy or dairy-adjacent to soothe capsaicin. Lassi is the traditional answer because fat + culture = heat relief.",
+        "alc": false,
+        "level": "casual",
+        "example_drink": "Mango lassi — store bought Trader Joe's version is genuinely good",
+        "notes": "Plain lassi works too but mango adds sweetness that helps with richer curries"
+    },
+    {
+        "id": "014",
+        "cuisine_ethnicity": "Indian",
+        "cuisine_protein": "vegetarian",
+        "cuisine_flavor_profile": [
+            "spicy",
+            "rich/fatty"
+        ],
+        "pairing_principle": "Kefir thinned with a little sparkling water and fresh mint mimics lassi's function but with more complexity — the probiotics and tang cut through cream-based curries differently than plain dairy.",
+        "alc": false,
+        "level": "mid",
+        "example_drink": "Plain kefir 4oz + 2oz sparkling water + fresh mint + pinch of cardamom",
+        "notes": "This sounds weird and tastes great — the cardamom is the bridge"
+    },
+    {
+        "id": "015",
+        "cuisine_ethnicity": "Indian",
+        "cuisine_protein": "vegetarian",
+        "cuisine_flavor_profile": [
+            "spicy",
+            "rich/fatty"
+        ],
+        "pairing_principle": "An off-dry Gewürztraminer has the lychee and rose aromatics that echo Indian spice blends while its residual sugar manages heat. It's one of the few wines that genuinely improves with spicy food.",
+        "alc": true,
+        "level": "elevated",
+        "example_drink": "Trimbach Gewürztraminer or Hugel et Fils Gentil from Alsace",
+        "notes": "Alsatian whites are criminally underrated with South Asian food"
+    },
+    {
+        "id": "016",
+        "cuisine_ethnicity": "Korean",
+        "cuisine_protein": "beef",
+        "cuisine_flavor_profile": [
+            "smoky",
+            "umami",
+            "salty"
+        ],
+        "pairing_principle": "Korean BBQ beef — galbi, bulgogi, brisket — is salty, umami-forward, and charred. It needs something that refreshes without competing. Cold barley tea is the Korean table standard and earns its place.",
+        "alc": false,
+        "level": "casual",
+        "example_drink": "Boricha (barley tea) — roasted, slightly bitter, served cold",
+        "notes": "You can find boricha bags at any Korean grocery; brew cold overnight"
+    },
+    {
+        "id": "017",
+        "cuisine_ethnicity": "Korean",
+        "cuisine_protein": "beef",
+        "cuisine_flavor_profile": [
+            "smoky",
+            "umami",
+            "salty"
+        ],
+        "pairing_principle": "Yuzu kosho's citrus-chile bite in drink form — a yuzu sparkling water with a pinch of salt — mirrors the condiment logic of Korean BBQ. The salt in the drink actually enhances the meat's savoriness.",
+        "alc": false,
+        "level": "mid",
+        "example_drink": "Kimino Yuzu Sparkling Water with a small pinch of flaky salt",
+        "notes": "Salting a drink sounds wrong and tastes right — same logic as a margarita rim"
+    },
+    {
+        "id": "018",
+        "cuisine_ethnicity": "Korean",
+        "cuisine_protein": "beef",
+        "cuisine_flavor_profile": [
+            "smoky",
+            "umami",
+            "salty"
+        ],
+        "pairing_principle": "Soju's clean, slightly sweet neutrality is the traditional Korean BBQ pairing for good reason — it doesn't fight the food, it resets. A soju and yuzu cocktail adds just enough brightness to lift the heaviness of charred meat.",
+        "alc": true,
+        "level": "elevated",
+        "example_drink": "Jinro Chamisul + fresh yuzu or yuzu juice + honey + sparkling water, served cold",
+        "notes": "Soju is lower ABV than spirits — it's meant to be drunk with food, not before"
+    },
+    {
+        "id": "019",
+        "cuisine_ethnicity": "Mediterranean",
+        "cuisine_protein": "seafood",
+        "cuisine_flavor_profile": [
+            "light",
+            "acidic"
+        ],
+        "pairing_principle": "Grilled or herb-roasted seafood with lemon, olive oil, and fresh herbs is one of the most delicate flavor profiles to pair. Anything too assertive kills it. Sparkling water with a citrus wheel is genuinely the right answer at the casual level.",
+        "alc": false,
+        "level": "casual",
+        "example_drink": "Topo Chico with a lemon or orange wheel",
+        "notes": "Don't overthink this one — the food is the star"
+    },
+    {
+        "id": "020",
+        "cuisine_ethnicity": "Mediterranean",
+        "cuisine_protein": "seafood",
+        "cuisine_flavor_profile": [
+            "light",
+            "acidic"
+        ],
+        "pairing_principle": "Sparkling tea — particularly white tea or green tea based — has the delicacy to match light seafood without overwhelming it. A citrus-forward sparkling tea bridges the lemon in the dish.",
+        "alc": false,
+        "level": "mid",
+        "example_drink": "Harney & Sons sparkling green tea or Dona sparkling botanical tea",
+        "notes": "Dona makes excellent sparkling teas that work as serious NA pairing options"
+    },
+    {
+        "id": "021",
+        "cuisine_ethnicity": "Mediterranean",
+        "cuisine_protein": "seafood",
+        "cuisine_flavor_profile": [
+            "light",
+            "acidic"
+        ],
+        "pairing_principle": "Albariño from Galicia is the textbook seafood wine — it's saline, bright, and mineral in a way that mirrors the ocean. With Mediterranean herb preparation it's almost unfairly good.",
+        "alc": true,
+        "level": "elevated",
+        "example_drink": "Pazo de Señorans Albariño or any Rías Baixas Albariño",
+        "notes": "Albariño is the answer to 'what wine goes with seafood' full stop"
+    },
+    {
+        "id": "022",
+        "cuisine_ethnicity": "BBQ/American",
+        "cuisine_protein": "pork",
+        "cuisine_flavor_profile": [
+            "smoky",
+            "rich/fatty",
+            "sweet"
+        ],
+        "pairing_principle": "Sweet, smoky BBQ pork — ribs, pulled pork with sauce — is rich enough to need acid and bitter to cut through. A cold lager does this simply: carbonation + mild bitter = palate reset.",
+        "alc": true,
+        "level": "casual",
+        "example_drink": "Lone Star, PBR, or any American lager — this is not the moment for craft",
+        "notes": "Sometimes the unpretentious answer is the right answer"
+    },
+    {
+        "id": "023",
+        "cuisine_ethnicity": "BBQ/American",
+        "cuisine_protein": "pork",
+        "cuisine_flavor_profile": [
+            "smoky",
+            "rich/fatty",
+            "sweet"
+        ],
+        "pairing_principle": "Switchel — apple cider vinegar, ginger, maple syrup, water — is the original American working drink and genuinely excellent with BBQ. The acid cuts fat, the ginger handles smoke, the maple mirrors the sauce.",
+        "alc": false,
+        "level": "mid",
+        "example_drink": "Switchel: 2 tbsp ACV, 1 tbsp maple syrup, 1 tsp fresh ginger, 8oz cold water",
+        "notes": "Make this yourself — it takes 5 minutes and tastes like it shouldn't work"
+    },
+    {
+        "id": "024",
+        "cuisine_ethnicity": "BBQ/American",
+        "cuisine_protein": "pork",
+        "cuisine_flavor_profile": [
+            "smoky",
+            "rich/fatty",
+            "sweet"
+        ],
+        "pairing_principle": "Bourbon's caramel and vanilla notes mirror the sweetness of BBQ sauce while its proof handles the fat. An old fashioned keeps it simple — you want to enhance the BBQ, not replace it.",
+        "alc": true,
+        "level": "elevated",
+        "example_drink": "Woodford Reserve Old Fashioned: 2oz bourbon, 1 sugar cube, 2 dashes Angostura, orange peel",
+        "notes": "Skip the cherry — it's a garnish fight with the BBQ sauce"
+    },
+    {
+        "id": "025",
+        "cuisine_ethnicity": "French",
+        "cuisine_protein": "chicken",
+        "cuisine_flavor_profile": [
+            "rich/fatty",
+            "light"
+        ],
+        "pairing_principle": "French roast chicken — poulet rôti, coq au vin, chicken with cream sauce — sits in a middle zone of richness. Something with enough acid to lift the fat but light enough not to overwhelm. Sparkling apple juice or dry cider territory.",
+        "alc": false,
+        "level": "casual",
+        "example_drink": "Martinelli's Sparkling Apple Cider — actually pairs well, not just for kids",
+        "notes": "The apple acid and effervescence do real pairing work here"
+    },
+    {
+        "id": "026",
+        "cuisine_ethnicity": "French",
+        "cuisine_protein": "chicken",
+        "cuisine_flavor_profile": [
+            "rich/fatty",
+            "light"
+        ],
+        "pairing_principle": "A ceremonial grade matcha latte with oat milk has a grassy bitterness and creamy body that mirrors the richness of French chicken preparation while the tannins in matcha cut through the fat.",
+        "alc": false,
+        "level": "mid",
+        "example_drink": "Ceremonial grade matcha + oat milk, lightly sweetened, served warm or iced",
+        "notes": "Use Ippodo or Encha matcha — quality matters here more than most drinks"
+    },
+    {
+        "id": "027",
+        "cuisine_ethnicity": "French",
+        "cuisine_protein": "chicken",
+        "cuisine_flavor_profile": [
+            "rich/fatty",
+            "light"
+        ],
+        "pairing_principle": "White Burgundy — Chardonnay from Mâcon or Chablis — is the classic match for French chicken. Chablis specifically has a steely minerality that cuts cream sauces; Mâcon is rounder and works better with simpler roasts.",
+        "alc": true,
+        "level": "elevated",
+        "example_drink": "Domaine Weinbach Chablis or Louis Jadot Mâcon-Villages depending on the preparation",
+        "notes": "Chablis for cream sauce, Mâcon for a simple roast — the preparation matters"
+    },
+    {
+        "id": "028",
+        "cuisine_ethnicity": "Chinese",
+        "cuisine_protein": "pork",
+        "cuisine_flavor_profile": [
+            "umami",
+            "salty",
+            "sweet"
+        ],
+        "pairing_principle": "Char siu, red-braised pork, or sweet soy preparations have a lacquered sweetness and deep umami that pairs well with something slightly bitter and cold. Chrysanthemum tea is the traditional Chinese pairing and earns it.",
+        "alc": false,
+        "level": "casual",
+        "example_drink": "Chrysanthemum tea, cold-brewed or bottled — Pokka or any Chinese grocery brand",
+        "notes": "Slightly bitter florals are a surprisingly good counterpoint to sweet-savory Chinese pork"
+    },
+    {
+        "id": "029",
+        "cuisine_ethnicity": "Chinese",
+        "cuisine_protein": "pork",
+        "cuisine_flavor_profile": [
+            "umami",
+            "salty",
+            "sweet"
+        ],
+        "pairing_principle": "Pu-erh tea's earthy, aged depth mirrors the fermented and soy-forward notes in Chinese braised pork. Cold-brewed pu-erh has enough body to stand up to the dish without needing alcohol.",
+        "alc": false,
+        "level": "mid",
+        "example_drink": "Cold-brewed pu-erh: steep 1 tsp aged pu-erh in cold water 8 hours, serve over ice",
+        "notes": "Pu-erh is an acquired taste that rewards — if you haven't tried it, this is a good introduction"
+    },
+    {
+        "id": "030",
+        "cuisine_ethnicity": "Chinese",
+        "cuisine_protein": "pork",
+        "cuisine_flavor_profile": [
+            "umami",
+            "salty",
+            "sweet"
+        ],
+        "pairing_principle": "Shaoxing wine — the cooking wine used in most Chinese braised pork — drunk as a pairing creates a harmony of ingredients. A small pour of aged Shaoxing served warm mirrors the braising liquid in the dish itself.",
+        "alc": true,
+        "level": "elevated",
+        "example_drink": "Aged Shaoxing Huadiao wine, served warm in a small ceramic cup",
+        "notes": "This is a pairing move that impresses people who know food — most people have never had Shaoxing as a drink"
+    }
+]
