@@ -100,7 +100,7 @@ export default function App() {
     setError("");
 
     try {
-      const res = await fetch("http://localhost:3001/api/pair", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/pair`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ meal, alcFilter }),
@@ -176,8 +176,8 @@ export default function App() {
                 key={opt.value}
                 onClick={() => setAlcFilter(opt.value)}
                 className={`flex-1 py-2 rounded-xl text-sm font-semibold transition-all duration-200 border-2 ${alcFilter === opt.value
-                    ? "bg-[#b388e8] border-[#b388e8] text-white shadow-sm"
-                    : "bg-white border-[#e8d5f5] text-neutral-500 hover:border-[#b388e8]"
+                  ? "bg-[#b388e8] border-[#b388e8] text-white shadow-sm"
+                  : "bg-white border-[#e8d5f5] text-neutral-500 hover:border-[#b388e8]"
                   }`}
               >
                 {opt.label}
