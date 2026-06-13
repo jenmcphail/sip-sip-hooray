@@ -13,6 +13,11 @@ const openaiApiKey = process.env.OPENAI_API_KEY;
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY;
 
+const allowedOrigins = [
+    'http://localhost:5173',
+    'https://sip-sip-hooray.vercel.app'
+];
+
 if (!openaiApiKey) {
     console.error('Missing OPENAI_API_KEY. Check server/.env exists and contains OPENAI_API_KEY=...');
     process.exit(1);
@@ -24,9 +29,15 @@ if (!supabaseUrl || !supabaseServiceKey) {
 
 const app = express();
 app.use(cors({
-    origin: '*'
+    origin: function (origin, callback) {
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) {
+            return callback(new Error('Not allowed by CORS'), false);
+        }
+        return callback(null, true);
+    },
+    credentials: true
 }));
-app.options('*', cors());
 app.use(express.json());
 
 const openai = new OpenAI({ apiKey: openaiApiKey });
