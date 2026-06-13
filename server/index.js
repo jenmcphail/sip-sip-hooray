@@ -26,6 +26,7 @@ const app = express();
 app.use(cors({
     origin: '*'
 }));
+app.options('*', cors());
 app.use(express.json());
 
 const openai = new OpenAI({ apiKey: openaiApiKey });
