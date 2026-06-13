@@ -6,3 +6,7 @@ startCommand = "npm start"
 healthcheckPath = "/health"
 healthcheckTimeout = 300
 restartPolicyType = "ON_FAILURE"
+
+# Required Railway service variables (set in dashboard, not in repo):
+# OPENAI_API_KEY, SUPABASE_URL, SUPABASE_SERVICE_KEY
+# Optional: CLIENT_URL for extra CORS origins (comma-separated)

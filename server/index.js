@@ -5,13 +5,10 @@ import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
+import ws from 'ws';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: join(__dirname, '.env') });
-
-const openaiApiKey = process.env.OPENAI_API_KEY;
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY;
 
 const allowedOrigins = [
     'https://sip-sip-hooray.vercel.app',
@@ -26,7 +23,49 @@ function isAllowedOrigin(origin) {
     return false;
 }
 
+function getConfig() {
+    const openaiApiKey = process.env.OPENAI_API_KEY;
+    const supabaseUrl = process.env.SUPABASE_URL;
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY;
+
+    return {
+        openaiApiKey,
+        supabaseUrl,
+        supabaseServiceKey,
+        isConfigured: Boolean(openaiApiKey && supabaseUrl && supabaseServiceKey),
+    };
+}
+
+function getClients() {
+    const config = getConfig();
+
+    if (!config.isConfigured) {
+        const missing = [
+            !config.openaiApiKey && 'OPENAI_API_KEY',
+            !config.supabaseUrl && 'SUPABASE_URL',
+            !config.supabaseServiceKey && 'SUPABASE_SERVICE_KEY',
+        ].filter(Boolean);
+
+        throw new Error(`Server misconfigured. Missing: ${missing.join(', ')}`);
+    }
+
+    return {
+        openai: new OpenAI({ apiKey: config.openaiApiKey }),
+        supabase: createClient(config.supabaseUrl, config.supabaseServiceKey, {
+            realtime: { transport: ws },
+        }),
+    };
+}
+
 const app = express();
+
+app.get('/health', (_req, res) => {
+    const config = getConfig();
+    res.json({
+        ok: true,
+        configured: config.isConfigured,
+    });
+});
 
 app.use(cors({
     origin(origin, callback) {
@@ -41,18 +80,6 @@ app.use(cors({
 }));
 
 app.use(express.json());
-
-if (!openaiApiKey) {
-    console.error('Missing OPENAI_API_KEY.');
-    process.exit(1);
-}
-if (!supabaseUrl || !supabaseServiceKey) {
-    console.error('Missing SUPABASE_URL or SUPABASE_SERVICE_KEY.');
-    process.exit(1);
-}
-
-const openai = new OpenAI({ apiKey: openaiApiKey });
-const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 function sendError(res, err, status = 500) {
     const message = err?.message ?? 'Unknown error';
@@ -74,15 +101,21 @@ function formatPairingContext(pairings) {
         .join('\n');
 }
 
-app.get('/health', (_req, res) => {
-    res.json({ ok: true });
-});
-
 app.post('/api/pair', async (req, res) => {
     const { meal, alcFilter } = req.body;
 
     if (!meal) {
         return res.status(400).json({ error: 'Meal description is required' });
+    }
+
+    let openai;
+    let supabase;
+
+    try {
+        ({ openai, supabase } = getClients());
+    } catch (err) {
+        console.error(err.message);
+        return res.status(503).json({ error: err.message });
     }
 
     try {
@@ -153,7 +186,19 @@ Be specific. "A cold lager" is less useful than "Modelo Especial." "Something ac
     }
 });
 
+app.use((err, _req, res, _next) => {
+    console.error(err);
+    if (!res.headersSent) {
+        res.status(500).json({ error: err.message ?? 'Internal server error' });
+    }
+});
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, '0.0.0.0', () => {
+    const config = getConfig();
     console.log(`Server running on port ${PORT}`);
+    console.log(`Configured: ${config.isConfigured}`);
+    if (!config.isConfigured) {
+        console.error('Missing required env vars. Set OPENAI_API_KEY, SUPABASE_URL, and SUPABASE_SERVICE_KEY in Railway.');
+    }
 });
