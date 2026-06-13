@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import OpenAI from 'openai';
 import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
@@ -12,6 +13,35 @@ const openaiApiKey = process.env.OPENAI_API_KEY;
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY;
 
+const allowedOrigins = [
+    'https://sip-sip-hooray.vercel.app',
+    'http://localhost:5173',
+    ...(process.env.CLIENT_URL?.split(',').map((url) => url.trim()).filter(Boolean) ?? []),
+];
+
+function isAllowedOrigin(origin) {
+    if (!origin) return true;
+    if (allowedOrigins.includes(origin)) return true;
+    if (origin.endsWith('.vercel.app')) return true;
+    return false;
+}
+
+const app = express();
+
+app.use(cors({
+    origin(origin, callback) {
+        if (isAllowedOrigin(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error(`Origin not allowed: ${origin}`));
+        }
+    },
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type'],
+}));
+
+app.use(express.json());
+
 if (!openaiApiKey) {
     console.error('Missing OPENAI_API_KEY.');
     process.exit(1);
@@ -20,19 +50,6 @@ if (!supabaseUrl || !supabaseServiceKey) {
     console.error('Missing SUPABASE_URL or SUPABASE_SERVICE_KEY.');
     process.exit(1);
 }
-
-const app = express();
-app.use(express.json());
-
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-    if (req.method === 'OPTIONS') {
-        return res.sendStatus(200);
-    }
-    next();
-});
 
 const openai = new OpenAI({ apiKey: openaiApiKey });
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
@@ -56,6 +73,10 @@ function formatPairingContext(pairings) {
         })
         .join('\n');
 }
+
+app.get('/health', (_req, res) => {
+    res.json({ ok: true });
+});
 
 app.post('/api/pair', async (req, res) => {
     const { meal, alcFilter } = req.body;
@@ -133,4 +154,6 @@ Be specific. "A cold lager" is less useful than "Modelo Especial." "Something ac
 });
 
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server running on port ${PORT}`);
+});
