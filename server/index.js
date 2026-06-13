@@ -1,5 +1,4 @@
 import express from 'express';
-import cors from 'cors';
 import OpenAI from 'openai';
 import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
@@ -10,18 +9,6 @@ import ws from 'ws';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: join(__dirname, '.env') });
 
-const allowedOrigins = [
-    'https://sip-sip-hooray.vercel.app',
-    'http://localhost:5173',
-    ...(process.env.CLIENT_URL?.split(',').map((url) => url.trim()).filter(Boolean) ?? []),
-];
-
-function isAllowedOrigin(origin) {
-    if (!origin) return true;
-    if (allowedOrigins.includes(origin)) return true;
-    if (origin.endsWith('.vercel.app')) return true;
-    return false;
-}
 
 function getConfig() {
     const openaiApiKey = process.env.OPENAI_API_KEY;
@@ -67,17 +54,15 @@ app.get('/health', (_req, res) => {
     });
 });
 
-app.use(cors({
-    origin(origin, callback) {
-        if (isAllowedOrigin(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error(`Origin not allowed: ${origin}`));
-        }
-    },
-    methods: ['GET', 'POST', 'OPTIONS'],
-    allowedHeaders: ['Content-Type'],
-}));
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end();
+    }
+    next();
+});
 
 app.use(express.json());
 
