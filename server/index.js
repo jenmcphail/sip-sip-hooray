@@ -1,5 +1,4 @@
 import express from 'express';
-import cors from 'cors';
 import OpenAI from 'openai';
 import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
@@ -13,32 +12,27 @@ const openaiApiKey = process.env.OPENAI_API_KEY;
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY;
 
-const allowedOrigins = [
-    'http://localhost:5173',
-    'https://sip-sip-hooray.vercel.app'
-];
-
 if (!openaiApiKey) {
-    console.error('Missing OPENAI_API_KEY. Check server/.env exists and contains OPENAI_API_KEY=...');
+    console.error('Missing OPENAI_API_KEY.');
     process.exit(1);
 }
 if (!supabaseUrl || !supabaseServiceKey) {
-    console.error('Missing SUPABASE_URL or SUPABASE_SERVICE_KEY in server/.env');
+    console.error('Missing SUPABASE_URL or SUPABASE_SERVICE_KEY.');
     process.exit(1);
 }
 
 const app = express();
-app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) === -1) {
-            return callback(new Error('Not allowed by CORS'), false);
-        }
-        return callback(null, true);
-    },
-    credentials: true
-}));
 app.use(express.json());
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    if (req.method === 'OPTIONS') {
+        return res.sendStatus(200);
+    }
+    next();
+});
 
 const openai = new OpenAI({ apiKey: openaiApiKey });
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
