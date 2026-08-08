@@ -11,9 +11,9 @@ dotenv.config({ path: join(__dirname, '.env') });
 
 
 function getConfig() {
-    const openaiApiKey = process.env.OPENAI_API_KEY;
-    const supabaseUrl = process.env.SUPABASE_URL;
-    const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY;
+    const openaiApiKey = process.env.OPENAI_API_KEY?.trim();
+    const supabaseUrl = process.env.SUPABASE_URL?.trim();
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY?.trim();
 
     return {
         openaiApiKey,
@@ -21,6 +21,15 @@ function getConfig() {
         supabaseServiceKey,
         isConfigured: Boolean(openaiApiKey && supabaseUrl && supabaseServiceKey),
     };
+}
+
+function formatError(err) {
+    const parts = [err?.message ?? String(err)];
+    if (err?.cause?.code) parts.push(err.cause.code);
+    if (err?.cause?.message && err.cause.message !== err?.message) {
+        parts.push(err.cause.message);
+    }
+    return parts.filter(Boolean).join(' — ');
 }
 
 function getClients() {
@@ -67,7 +76,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 function sendError(res, err, status = 500) {
-    const message = err?.message ?? 'Unknown error';
+    const message = formatError(err);
     if (res.headersSent) {
         res.write(`data: ${JSON.stringify({ error: message })}\n\n`);
         res.end();
@@ -104,20 +113,34 @@ app.post('/api/pair', async (req, res) => {
     }
 
     try {
-        const embeddingResponse = await openai.embeddings.create({
-            model: 'text-embedding-3-small',
-            input: meal,
-        });
+        let embeddingResponse;
+        try {
+            embeddingResponse = await openai.embeddings.create({
+                model: 'text-embedding-3-small',
+                input: meal,
+            });
+        } catch (err) {
+            console.error('OpenAI embedding failed:', err);
+            throw new Error(`OpenAI embedding failed: ${formatError(err)}`);
+        }
+
         const queryEmbedding = embeddingResponse.data[0].embedding;
 
-        const { data: pairings, error } = await supabase.rpc('match_pairings', {
-            query_embedding: queryEmbedding,
-            match_threshold: 0.3,
-            match_count: 9,
-            filter_alc: alcFilter === 'alc' ? true : alcFilter === 'nonalc' ? false : null,
-        });
+        let pairings;
+        try {
+            const { data, error } = await supabase.rpc('match_pairings', {
+                query_embedding: queryEmbedding,
+                match_threshold: 0.3,
+                match_count: 9,
+                filter_alc: alcFilter === 'alc' ? true : alcFilter === 'nonalc' ? false : null,
+            });
 
-        if (error) throw error;
+            if (error) throw error;
+            pairings = data;
+        } catch (err) {
+            console.error('Supabase search failed:', err);
+            throw new Error(`Supabase search failed: ${formatError(err)}`);
+        }
 
         const pairingContext = formatPairingContext(pairings);
 
@@ -145,12 +168,18 @@ Format your response exactly like this for each level:
 
 Be specific. "A cold lager" is less useful than "Modelo Especial." "Something acidic" is less useful than "GT's Trilogy kombucha." The specificity is the point.`;
 
-        const stream = await openai.chat.completions.create({
-            model: 'gpt-4o-mini',
-            messages: [{ role: 'user', content: prompt }],
-            stream: true,
-            max_tokens: 600,
-        });
+        let stream;
+        try {
+            stream = await openai.chat.completions.create({
+                model: 'gpt-4o-mini',
+                messages: [{ role: 'user', content: prompt }],
+                stream: true,
+                max_tokens: 600,
+            });
+        } catch (err) {
+            console.error('OpenAI chat failed:', err);
+            throw new Error(`OpenAI chat failed: ${formatError(err)}`);
+        }
 
         res.setHeader('Content-Type', 'text/event-stream');
         res.setHeader('Cache-Control', 'no-cache');

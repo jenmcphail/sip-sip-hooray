@@ -106,7 +106,18 @@ export default function App() {
         body: JSON.stringify({ meal, alcFilter }),
       });
 
-      if (!res.ok) throw new Error("Something went wrong");
+      if (!res.ok) {
+        const body = await res.text();
+        try {
+          const data = JSON.parse(body);
+          throw new Error(data.error ?? "Something went wrong");
+        } catch (parseErr) {
+          if (parseErr instanceof Error && parseErr.message !== "Something went wrong") {
+            throw parseErr;
+          }
+          throw new Error(body || "Something went wrong");
+        }
+      }
 
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
@@ -130,7 +141,7 @@ export default function App() {
         }
       }
     } catch (err) {
-      setError("Something went wrong. Try again!");
+      setError(err.message || "Something went wrong. Try again!");
     } finally {
       setLoading(false);
     }
