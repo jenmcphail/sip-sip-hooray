@@ -48,6 +48,16 @@ function parseResponse(response) {
   return sections;
 }
 
+function getApiBaseUrl() {
+  const url = import.meta.env.VITE_API_URL?.trim();
+  if (!url) {
+    throw new Error("API URL is not configured. Set VITE_API_URL in Vercel.");
+  }
+
+  const withProtocol = /^https?:\/\//i.test(url) ? url : `https://${url}`;
+  return withProtocol.replace(/\/$/, "");
+}
+
 function PairingCard({ level, content, loading }) {
   const isEmpty = !content && !loading;
 
@@ -100,7 +110,7 @@ export default function App() {
     setError("");
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/pair`, {
+      const res = await fetch(`${getApiBaseUrl()}/api/pair`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ meal, alcFilter }),
